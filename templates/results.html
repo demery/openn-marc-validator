@@ -1,0 +1,51 @@
+{% extends "bootstrap/base.html" %}
+
+{% block body %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <h2>Results</h2>
+    {% if validator.errors %}
+    <div class="alert alert-danger" role="alert">
+      <p>ERRORS FOUND!</p>
+    <ul>
+      {% for error in validator.errors %}
+      <li>{{error}}</li>
+      {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+    <div>There are no errors</div>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    <h2>Parameters</h2>
+    <p><strong>Prep configuration:</strong> {{ prep_config_name }}</p>
+    <p><strong>Holdings ID:</strong> {{ holdings_id }}</p>
+    <p><strong>Input file:</strong> {{ file_name }}</p>
+    <p><strong>Required xpaths:</strong></p>
+    <ul>
+      {% for xpath in required_xpaths %}
+      <li>{{xpath}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+  <div class="row">
+    <h2>Input XML</h2>
+    <div style="background-color: lightgrey; ">
+      <pre>
+{{ validator.xml().decode('utf-8')|e }}
+      </pre>
+    </div>
+  </div>
+
+</div>
+
+  {% endblock %}
+  {% endblock %}
+  </html>

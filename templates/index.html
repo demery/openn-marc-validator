@@ -1,0 +1,49 @@
+{% extends "bootstrap/base.html" %}
+
+{% block body %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h2>OPenn XML validator</h2>
+
+    <p>Check a MARC XML file for required values.</p>
+    <p>Project-Repository and MARC XML file are required</p>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <form method="post" action="/validate" enctype="multipart/form-data" class="form">
+        <div class="form-group">
+          <label for="prep_config">Project-Repository*</label>
+          <select id="prep_config" class="form-control" name="prep_config">
+            <option/>
+            {% for opt in marc_configs %}
+            <option value='{{ opt[0] }}'>{{ opt[1] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="holdings_id">Holdings ID</label>
+          <input id="holdings_id" class="form-control" type="number" size="12" name="holdings_id">
+          <span id="helpBlock" class="help-block">Enter the holdings ID for Penn books with more
+          than one call number assigned to a BibID.</span>
+        </div>
+        <div class="form-group">
+          <label for="xml_file">MARC XML*</label>
+          <input type="file" class="form-control" name="xml_file" accept="text/xml">
+        </div>
+
+        <div>
+          <input type="Submit">
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-7"></div>
+  </div>
+</div>
+<div>
+{% endblock %}
+{% endblock %}
+</html>
+
+
